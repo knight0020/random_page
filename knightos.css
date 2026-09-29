@@ -1,0 +1,42 @@
+/* ===== KnightOS ===== */
+#os{position:fixed;inset:0;z-index:200;display:none;overflow:hidden;color:var(--text);user-select:none;background:radial-gradient(circle at 20% 20%,color-mix(in srgb,var(--g1) 55%,transparent),transparent 45%),radial-gradient(circle at 80% 30%,color-mix(in srgb,var(--g2) 55%,transparent),transparent 45%),radial-gradient(circle at 50% 100%,color-mix(in srgb,var(--g3) 55%,transparent),transparent 50%),var(--bg)}
+#os.on{display:block}
+.desk{position:absolute;inset:0 0 48px 0}
+.icons{display:flex;flex-direction:column;flex-wrap:wrap;align-content:flex-start;height:100%;padding:14px;gap:6px}
+.ico{width:88px;padding:8px 4px;text-align:center;border-radius:12px;cursor:pointer;font-size:12px;font-weight:600;text-shadow:0 1px 6px #0007}
+.ico:hover{background:var(--hover)}.ico b{display:block;font-size:34px;margin-bottom:2px}
+.win{position:absolute;display:flex;flex-direction:column;min-width:240px;min-height:150px;overflow:hidden;resize:both;background:var(--bg2);border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px #0009}
+.win.max{inset:0!important;width:auto!important;height:auto!important;border-radius:0;resize:none}
+.tb{display:flex;align-items:center;gap:6px;padding:8px 10px;font-size:13px;font-weight:700;cursor:move;touch-action:none;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 40%,var(--bg2)),color-mix(in srgb,var(--accent2) 40%,var(--bg2)))}
+.tb span{flex:1}.tb button{width:22px;height:22px;border-radius:50%;border:0;cursor:pointer;font-size:11px;color:#222}
+.wb{flex:1;overflow:auto;user-select:text;position:relative}
+.task{position:absolute;left:0;right:0;bottom:0;height:48px;display:flex;align-items:center;gap:8px;padding:0 8px;background:var(--nav);backdrop-filter:blur(18px);border-top:1px solid var(--border)}
+.tw{flex:1;display:flex;gap:6px;overflow:auto}.tw .btn{white-space:nowrap}.tw .btn.min{opacity:.55}
+#tclock{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.smenu{position:absolute;left:8px;bottom:56px;width:230px;padding:8px;display:none;flex-direction:column;gap:2px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;box-shadow:0 20px 50px #0008}
+.smenu.on{display:flex}.smenu button{text-align:left;padding:9px 10px;background:none;border:0;color:var(--text);border-radius:8px;cursor:pointer;font-size:14px}.smenu button:hover{background:var(--hover)}
+.boot{position:absolute;inset:0;z-index:8;background:#000;color:#8ff58f;font:14px/1.6 monospace;padding:24px;white-space:pre-wrap}
+.boot.lk{background:color-mix(in srgb,var(--bg) 60%,transparent);backdrop-filter:blur(24px);color:var(--text);font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.lc{font-size:64px;font-weight:800}.av{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-size:42px;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.bsod{position:absolute;inset:0;z-index:9;background:#0b57d0;color:#fff;padding:8vw;font-family:system-ui,sans-serif;cursor:pointer}.bsod h1{font-size:96px}.bsod p{margin-top:16px;font-size:18px}
+.fbar{display:flex;gap:8px;align-items:center;padding:8px;border-bottom:1px solid var(--border)}.fbar .in{margin:0}.fbar .btn{margin:0}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,90px);gap:6px;padding:10px}
+.fi{text-align:center;padding:8px;border-radius:10px;cursor:pointer;font-size:12px;word-break:break-all}.fi:hover{background:var(--hover)}.fi b{display:block;font-size:30px}
+.ta{width:100%;height:calc(100% - 52px);border:0;background:transparent;color:var(--text);padding:12px;font:14px/1.5 monospace;outline:none;resize:none}
+.tm{background:rgba(0,0,0,.88);color:#8ff58f;font:13px/1.5 monospace;padding:10px}
+.tout div{white-space:pre-wrap;min-height:1.5em}.trow{display:flex}.tin{flex:1;background:none;border:0;outline:0;color:inherit;font:inherit}
+.cd{font-size:24px;text-align:right;margin:10px;width:calc(100% - 20px)}.ck{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:0 10px 10px}
+.pk{display:flex;gap:4px;padding:14px;height:100%}
+.pk button{flex:1;background:#fff;color:#333;border:1px solid #888;border-radius:0 0 10px 10px;cursor:pointer;font-weight:700;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px}.pk button:active{background:var(--accent);color:#fff}
+.tg{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+/* ===== Anime buddies ===== */
+#buddies{position:fixed;inset:0;z-index:15;pointer-events:none;overflow:hidden}
+body.nobuddy #buddies{display:none}
+.buddy{position:absolute;width:78px;cursor:pointer;pointer-events:auto;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));animation:drift var(--t) ease-in-out infinite alternate;transition:transform .2s}
+.buddy:hover{scale:1.15}.buddy svg{display:block;width:100%;height:auto;animation:bob 2.4s ease-in-out infinite}
+.say{position:absolute;bottom:100%;left:50%;translate:-50% 0;white-space:nowrap;padding:6px 10px;border-radius:12px;background:#fff;color:#2b1745;font-size:12px;font-weight:700;box-shadow:0 6px 20px #0004;animation:fadeUp .3s both}
+.petal{position:absolute;top:-30px;font-size:16px;opacity:.8;animation:petal var(--t) linear infinite}
+@keyframes drift{0%{transform:translate(0,0) rotate(-5deg)}100%{transform:translate(var(--dx),var(--dy)) rotate(5deg)}}
+@keyframes bob{50%{transform:translateY(-6px) scale(1.03)}}
+@keyframes petal{to{transform:translate(var(--dx),110vh) rotate(540deg)}}
+@media(max-width:600px){.buddy{width:56px}}

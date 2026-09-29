@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070914">
+<meta name="description" content="Knight0020 — a small corner of the internet.">
+<title>Knight0020 ⚔️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#070914;--bg2:#0d1122;--card:rgba(17,22,42,.72);--border:rgba(255,255,255,.09);--text:#f4f7ff;--muted:#9299b3;--accent:#7c8cff;--accent2:#a855f7;--g1:#5b6cff;--g2:#a855f7;--g3:#2563eb;--soft:rgba(255,255,255,.05);--hover:rgba(255,255,255,.1);--nav:rgba(8,11,22,.65);--star:255,255,255;--success:#4ade80;--danger:#fb7185}
+[data-theme=neon]{--bg:#0a0014;--bg2:#160029;--card:rgba(30,6,50,.72);--text:#fff0ff;--muted:#c79bd9;--accent:#ff2bd6;--accent2:#00f0ff;--g1:#ff2bd6;--g2:#00f0ff;--g3:#7a00ff;--nav:rgba(12,0,24,.7)}
+[data-theme=sunset]{--bg:#1a0b1f;--bg2:#2a1030;--card:rgba(50,18,48,.7);--text:#fff3ea;--muted:#d9a9b8;--accent:#ff7a45;--accent2:#ff3d81;--g1:#ff7a45;--g2:#ff3d81;--g3:#ffb020;--nav:rgba(26,11,31,.7)}
+[data-theme=aurora]{--bg:#04120f;--bg2:#08201b;--card:rgba(8,36,30,.7);--text:#eafff6;--muted:#8fbfae;--accent:#2dffb0;--accent2:#3aa0ff;--g1:#2dffb0;--g2:#3aa0ff;--g3:#9b5cff;--nav:rgba(4,18,15,.7)}
+[data-theme=lava]{--bg:#140505;--bg2:#240a08;--card:rgba(44,12,8,.72);--text:#fff1e8;--muted:#d1a08f;--accent:#ff4d2e;--accent2:#ffc300;--g1:#ff4d2e;--g2:#ffc300;--g3:#c1121f;--nav:rgba(20,5,5,.7)}
+[data-theme=candy]{--bg:#fff1f8;--bg2:#ffe3f2;--card:rgba(255,255,255,.78);--border:rgba(120,60,160,.16);--text:#2b1745;--muted:#7a5c95;--accent:#ff4fa0;--accent2:#8b5cf6;--g1:#ff8ccf;--g2:#a78bfa;--g3:#7dd3fc;--soft:rgba(139,92,246,.07);--hover:rgba(139,92,246,.14);--nav:rgba(255,255,255,.7);--star:139,92,246}
+[data-theme=sunny]{--bg:#fff9e6;--bg2:#ffefb8;--card:rgba(255,255,255,.8);--border:rgba(160,90,0,.18);--text:#3a2500;--muted:#8a6a2f;--accent:#ff8a00;--accent2:#ef476f;--g1:#ffd166;--g2:#ef476f;--g3:#06d6a0;--soft:rgba(255,138,0,.08);--hover:rgba(255,138,0,.16);--nav:rgba(255,255,255,.72);--star:239,71,111}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .5s,color .5s}
+.background{position:fixed;inset:0;z-index:-3;overflow:hidden;background:radial-gradient(circle at 15% 20%,color-mix(in srgb,var(--g1) 20%,transparent),transparent 32%),radial-gradient(circle at 85% 10%,color-mix(in srgb,var(--g2) 18%,transparent),transparent 32%),radial-gradient(circle at 50% 100%,color-mix(in srgb,var(--g3) 16%,transparent),transparent 38%),var(--bg)}
+.glow{position:absolute;width:450px;height:450px;border-radius:50%;filter:blur(120px);opacity:.22;animation:float 12s ease-in-out infinite alternate}
+.glow.one{background:var(--g1);top:-200px;left:-150px}.glow.two{background:var(--g2);right:-180px;top:35%;animation-delay:-4s}.glow.three{background:var(--g3);bottom:-250px;left:35%;animation-delay:-7s}
+@keyframes float{to{transform:translate(80px,40px) scale(1.2)}}
+#stars{position:fixed;inset:0;z-index:-2;pointer-events:none}
+nav{width:min(1150px,92%);margin:20px auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);background:var(--nav);backdrop-filter:blur(18px);border-radius:18px;position:sticky;top:15px;z-index:20}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800}
+.logo-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 25px color-mix(in srgb,var(--accent) 45%,transparent);font-size:20px}
+.nav-right{display:flex;align-items:center;gap:15px;position:relative}
+.clock{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.theme-btn{border:1px solid var(--border);background:var(--soft);color:var(--text);height:38px;padding:0 13px;border-radius:11px;cursor:pointer;transition:.25s;font-weight:600}
+.theme-btn:hover{background:var(--hover);transform:rotate(-3deg)}
+#themes{position:absolute;right:0;top:50px;width:220px;padding:10px;border:1px solid var(--border);background:var(--bg2);border-radius:16px;display:none;flex-direction:column;gap:4px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+#themes.open{display:flex}
+#themes button{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid transparent;border-radius:10px;background:none;color:var(--text);cursor:pointer;font-size:14px}
+#themes button:hover,#themes button.on{background:var(--hover);border-color:var(--border)}
+#themes i{width:26px;height:26px;border-radius:50%}
+main{width:min(1150px,92%);margin:auto}
+.hero{min-height:560px;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 0}
+.hero-content{max-width:800px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid var(--border);border-radius:999px;background:var(--soft);color:var(--muted);font-size:13px;margin-bottom:25px;animation:fadeUp .7s ease both}
+.status-dot{width:7px;height:7px;background:var(--success);border-radius:50%;box-shadow:0 0 12px var(--success)}
+h1{font-size:clamp(60px,12vw,125px);line-height:.85;letter-spacing:-6px;font-weight:900;background:linear-gradient(110deg,var(--text) 10%,var(--accent) 45%,var(--accent2) 75%,var(--text));background-size:250% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 7s linear infinite,fadeUp .8s ease both;padding-bottom:8px}
+@keyframes shine{to{background-position:250% center}}
+.hero p{margin:28px auto;color:var(--muted);font-size:17px;max-width:600px;line-height:1.7;animation:fadeUp 1s .1s ease both}
+.hero-buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;animation:fadeUp 1s .2s ease both}
+.btn{padding:12px 18px;border-radius:13px;border:1px solid var(--border);color:var(--text);background:var(--soft);text-decoration:none;cursor:pointer;font-weight:600;font-size:14px;transition:.25s;font-family:inherit}
+.btn:hover{transform:translateY(-3px);background:var(--hover)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;box-shadow:0 10px 35px color-mix(in srgb,var(--accent) 30%,transparent)}
+.btn.sm{padding:8px 12px;font-size:13px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+section{padding:50px 0}
+.section-title{margin-bottom:25px}
+.section-title span{color:var(--accent);font-size:13px;font-weight:700;letter-spacing:2px}
+.section-title h2{font-size:32px;margin-top:7px}
+.section-title p{color:var(--muted);margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{border:1px solid var(--border);background:var(--card);backdrop-filter:blur(18px);border-radius:20px;padding:24px;transition:.3s;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.card::before{content:"";position:absolute;width:150px;height:150px;background:var(--accent);filter:blur(90px);opacity:.12;top:-70px;right:-50px}
+.card:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--accent) 45%,transparent);box-shadow:0 20px 50px rgba(0,0,0,.15)}
+.card-icon{font-size:30px;margin-bottom:12px}
+.card h3{margin-bottom:6px}
+.card p{color:var(--muted);line-height:1.5;font-size:14px}
+.card .btn{margin-top:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row .btn{margin-top:12px}
+.game-output{margin-top:14px;min-height:38px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:600;flex-wrap:wrap}
+.in{width:100%;margin-top:12px;padding:11px;border-radius:10px;border:1px solid var(--border);background:var(--soft);color:var(--text);outline:none;font-family:inherit}
+.in:focus{border-color:var(--accent)}
+.reaction-area{height:85px;margin-top:14px;border-radius:13px;background:var(--soft);display:grid;place-items:center;cursor:pointer;color:var(--muted);border:1px dashed var(--border);user-select:none}
+.reaction-area.waiting{background:rgba(251,113,133,.15);color:var(--danger)}
+.reaction-area.ready{background:rgba(74,222,128,.18);color:var(--success);border-color:rgba(74,222,128,.4)}
+.board{display:grid;gap:6px;margin-top:14px}
+.b3{grid-template-columns:repeat(3,1fr)}.b4{grid-template-columns:repeat(4,1fr)}
+.board button{aspect-ratio:1;font-size:26px;border-radius:12px;border:1px solid var(--border);background:var(--soft);color:var(--text);cursor:pointer;transition:.15s;font-family:inherit}
+.board button:hover{background:var(--hover);transform:scale(1.05)}
+.board button.on{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 35%,transparent),color-mix(in srgb,var(--accent2) 35%,transparent))}
+canvas#snake{width:100%;max-width:240px;align-self:center;margin-top:12px;border-radius:12px;border:1px solid var(--border);background:var(--soft);image-rendering:pixelated}
+.pad{display:grid;grid-template-columns:repeat(3,44px);gap:4px;justify-content:center;margin-top:10px}
+.pad button{height:36px;border-radius:9px;border:1px solid var(--border);background:var(--soft);color:var(--text);cursor:pointer}
+.pad button:nth-child(1){grid-column:2}.pad button:nth-child(2){grid-column:1;grid-row:2}.pad button:nth-child(3){grid-column:2;grid-row:2}.pad button:nth-child(4){grid-column:3;grid-row:2}
+.quote-box{padding:30px;border:1px solid var(--border);border-radius:20px;background:var(--card);text-align:center}
+#quote{font-size:20px;line-height:1.6;margin-bottom:12px}
+#quoteAuthor{color:var(--muted);font-size:14px;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.stat{padding:20px;text-align:center;border:1px solid var(--border);border-radius:16px;background:var(--soft)}
+.stat-number{font-size:28px;font-weight:800;margin-bottom:5px;color:var(--accent)}
+.stat-label{color:var(--muted);font-size:12px}
+footer{width:min(1150px,92%);margin:30px auto;padding:25px 0 35px;border-top:1px solid var(--border);display:flex;justify-content:space-between;color:var(--muted);font-size:13px;flex-wrap:wrap;gap:8px}
+.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,100px);background:var(--bg2);border:1px solid var(--border);padding:12px 18px;border-radius:12px;opacity:0;transition:.35s;z-index:100}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.cf{position:fixed;top:-20px;width:9px;height:14px;z-index:99;pointer-events:none;animation:fall 2.2s ease-in forwards}
+@keyframes fall{to{transform:translate(var(--x),108vh) rotate(720deg)}}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.clock{display:none}h1{letter-spacing:-4px}.hero{min-height:480px}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<link rel="stylesheet" href="knightos.css">
+</head>
+<body>
+<div class="background"><div class="glow one"></div><div class="glow two"></div><div class="glow three"></div></div>
+<canvas id="stars"></canvas>
+<nav>
+  <div class="logo"><div class="logo-icon">⚔️</div><span>Knight0020</span></div>
+  <div class="nav-right">
+    <div class="clock" id="clock">00:00:00</div>
+    <button class="theme-btn" onclick="openOS()">💻 KnightOS</button><button class="theme-btn" id="buddyBtn" onclick="toggleBuddies()">🌸 On</button><button class="theme-btn" onclick="$('themes').classList.toggle('open')">🎨 Themes</button>
+    <div id="themes"></div>
+  </div>
+</nav>
+<main>
+<section class="hero"><div class="hero-content">
+  <div class="badge"><span class="status-dot"></span>A tiny corner of the internet</div>
+  <h1>Knight0020</h1>
+  <p>Welcome to my little digital realm. A place for experiments, random ideas, tiny games and things that don't need a reason.</p>
+  <div class="hero-buttons">
+    <a href="#arcade" class="btn primary">⚔️ Enter the Realm</a>
+    <button class="btn" onclick="openOS()">💻 Launch KnightOS</button><button class="btn" onclick="randomQuote()">✨ Surprise Me</button>
+    <button class="btn" onclick="randomTheme()">🎲 Random Theme</button>
+  </div>
+</div></section>
+
+<section id="games">
+  <div class="section-title"><span>FUN ZONE</span><h2>Things to waste your time on 😈</h2><p>Because every website needs completely unnecessary features.</p></div>
+  <div class="grid">
+    <div class="card"><div class="card-icon">🪙</div><h3>Coin Flip</h3><p>Let an extremely sophisticated algorithm decide for you.</p><div class="game-output" id="coinResult">Heads or tails?</div><button class="btn primary" onclick="flipCoin()">Flip Coin</button></div>
+    <div class="card"><div class="card-icon">🔮</div><h3>Fortune Generator</h3><p>Discover your extremely questionable destiny.</p><div class="game-output" id="fortuneResult">Your destiny awaits...</div><button class="btn primary" onclick="fortune()">Reveal</button></div>
+    <div class="card"><div class="card-icon">🎯</div><h3>Guess the Number</h3><p>I'm thinking of a number between 1 and 20.</p><input class="in" id="guessInput" type="number" min="1" max="20" placeholder="Your guess"><div class="game-output" id="guessResult">Take your shot.</div><button class="btn primary" onclick="guessNumber()">Guess</button></div>
+    <div class="card"><div class="card-icon">⚡</div><h3>Reaction Test</h3><p>Click when the box turns green. Don't cheat.</p><div id="reaction" class="reaction-area" onclick="reactionClick()">Click to start</div><div class="game-output" id="reactionResult">Best: —</div></div>
+    <div class="card"><div class="card-icon">🎨</div><h3>Random Color</h3><p>Generate a color and steal it for your next project.</p><div id="colorPreview" style="height:65px;margin:14px 0 0;border-radius:12px;background:#7c8cff;display:grid;place-items:center;font-weight:800;color:#fff;text-shadow:0 1px 4px #0006">#7C8CFF</div><button class="btn primary" onclick="randomColor()">Generate</button></div>
+    <div class="card"><div class="card-icon">🖱️</div><h3>Pointless Button</h3><p>There is absolutely no reason to click this button.</p><div class="game-output" id="clickCount">Clicks: 0</div><button class="btn primary" onclick="pointlessClick()">DO NOT CLICK</button></div>
+  </div>
+</section>
+
+<section id="arcade">
+  <div class="section-title"><span>ARCADE</span><h2>Actual games 🕹️</h2><p>Play against the machine, the clock, or your own thumbs.</p></div>
+  <div class="grid">
+    <div class="card"><div class="card-icon">❌</div><h3>Tic-Tac-Toe</h3><p>You are ❌. The AI is ⭕ and slightly ruthless.</p><div class="board b3" id="ttt"></div><div class="game-output" id="tttRes">Your move.</div><button class="btn" onclick="tttInit()">Restart</button></div>
+    <div class="card"><div class="card-icon">🧠</div><h3>Memory Match</h3><p>Find all 8 pairs in as few moves as possible.</p><div class="board b4" id="mem"></div><div class="game-output" id="memRes">Moves: 0</div><button class="btn" onclick="memInit()">Shuffle</button></div>
+    <div class="card"><div class="card-icon">🐍</div><h3>Snake</h3><p>Arrow keys / WASD, or use the pad below.</p><canvas id="snake" width="240" height="240"></canvas><div class="pad"><button onclick="dir(0,-1)">▲</button><button onclick="dir(-1,0)">◀</button><button onclick="dir(0,1)">▼</button><button onclick="dir(1,0)">▶</button></div><div class="game-output" id="snakeRes">Score: 0 • Best: 0</div><button class="btn primary" onclick="snakeStart()">Start</button></div>
+    <div class="card"><div class="card-icon">🐹</div><h3>Whack-a-Mole</h3><p>15 seconds. Hit every hamster you see.</p><div class="board b3" id="whack"></div><div class="game-output" id="whackRes">Score: 0</div><button class="btn primary" onclick="whackStart()">Start</button></div>
+    <div class="card"><div class="card-icon">✂️</div><h3>Rock Paper Scissors</h3><p>Classic. Unfair only if you lose.</p><div class="row"><button class="btn" onclick="rps(0)">🪨</button><button class="btn" onclick="rps(1)">📄</button><button class="btn" onclick="rps(2)">✂️</button></div><div class="game-output" id="rpsRes">Pick your weapon.</div></div>
+    <div class="card"><div class="card-icon">⌨️</div><h3>Typing Speed</h3><p id="typeText" style="color:var(--text);margin-top:4px"></p><input class="in" id="typeIn" placeholder="Type the sentence here..." autocomplete="off" spellcheck="false"><div class="game-output" id="typeRes">Start typing…</div><button class="btn" onclick="typeInit()">New sentence</button></div>
+    <div class="card"><div class="card-icon">👆</div><h3>Click Speed</h3><p>How many clicks can you land in 5 seconds?</p><button class="btn primary" id="cpsBtn" style="padding:22px;font-size:22px" onclick="cpsClick()">Click here!</button><div class="game-output" id="cpsRes">Timer starts on first click.</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title"><span>TOYS &amp; TOOLS</span><h2>Random, but useful-ish 🧰</h2><p>Small things that do small things.</p></div>
+  <div class="grid">
+    <div class="card"><div class="card-icon">🎱</div><h3>Magic 8-Ball</h3><p>Ask a yes/no question. Believe the answer.</p><input class="in" id="ballQ" placeholder="Will I ship it today?"><div class="game-output" id="ballRes">Shake to reveal.</div><button class="btn primary" onclick="ball()">Shake</button></div>
+    <div class="card"><div class="card-icon">🎲</div><h3>Dice Roller</h3><p>For board games, D&amp;D or bad decisions.</p><div class="row"><button class="btn sm" onclick="roll(6)">d6</button><button class="btn sm" onclick="roll(12)">d12</button><button class="btn sm" onclick="roll(20)">d20</button><button class="btn sm" onclick="roll(100)">d100</button></div><div class="game-output" id="diceRes" style="font-size:34px">🎲</div></div>
+    <div class="card"><div class="card-icon">🛡️</div><h3>Knight Name Forge</h3><p>Forge your legendary title.</p><div class="game-output" id="nameRes">Sir ???</div><button class="btn primary" onclick="forge()">Forge Name</button></div>
+    <div class="card"><div class="card-icon">🔐</div><h3>Password Generator</h3><p>Strong, random, and never stored.</p><input type="range" id="pwLen" min="8" max="32" value="16" oninput="pw()" style="margin-top:14px;accent-color:var(--accent)"><div class="game-output" id="pwRes" style="font-family:monospace;word-break:break-all"></div><div class="row"><button class="btn primary" onclick="pw()">Generate</button><button class="btn" onclick="copyText($('pwRes').textContent)">📋 Copy</button></div></div>
+    <div class="card"><div class="card-icon">😂</div><h3>Bad Joke Machine</h3><p>Warning: groan levels are high.</p><div class="game-output" id="jokeRes">Ready when you are.</div><button class="btn primary" onclick="joke()">Tell me one</button></div>
+    <div class="card"><div class="card-icon">⏳</div><h3>New Year Countdown</h3><p>Time until the next January 1st.</p><div class="game-output" id="cd" style="font-size:22px;font-variant-numeric:tabular-nums"></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title"><span>RANDOM WISDOM</span><h2>Words from the void</h2></div>
+  <div class="quote-box">
+    <div id="quote">"The secret of getting ahead is getting started."</div><div id="quoteAuthor">— Mark Twain</div>
+    <button class="btn primary" onclick="randomQuote()">New Wisdom ✨</button> <button class="btn" onclick="copyQuote()">📋 Copy</button>
+  </div>
+</section>
+
+<section>
+  <div class="section-title"><span>REALM STATISTICS</span><h2>Totally legitimate statistics</h2></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-number" id="visits">1</div><div class="stat-label">Imaginary Visitors</div></div>
+    <div class="stat"><div class="stat-number" id="clicksStat">0</div><div class="stat-label">Button Clicks</div></div>
+    <div class="stat"><div class="stat-number">∞</div><div class="stat-label">Potential</div></div>
+    <div class="stat"><div class="stat-number">0020</div><div class="stat-label">Knight Level</div></div>
+  </div>
+</section>
+</main>
+<footer><div>⚔️ Knight0020 — psst, try the Konami code ↑↑↓↓←→←→BA</div><div>Built with HTML • CSS • JavaScript</div></footer>
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+const $=id=>document.getElementById(id),rnd=n=>Math.floor(Math.random()*n),pick=a=>a[rnd(a.length)];
+const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
+
+/* Clock */
+function updateClock(){$("clock").textContent=new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit",second:"2-digit"})}
+updateClock();setInterval(updateClock,1000);
+
+/* Stars */
+const canvas=$("stars"),ctx=canvas.getContext("2d");let stars=[],starRGB="255,255,255";
+function resizeCanvas(){canvas.width=innerWidth;canvas.height=innerHeight;stars=[];const n=Math.min(180,Math.floor(innerWidth*innerHeight/9000));for(let i=0;i<n;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.6,s:Math.random()*.25+.05,o:Math.random()*.8+.2})}
+function animateStars(){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{s.y-=s.s;if(s.y<0)s.y=canvas.height;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fillStyle=`rgba(${starRGB},${s.o})`;ctx.fill()});requestAnimationFrame(animateStars)}
+resizeCanvas();animateStars();addEventListener("resize",resizeCanvas);
+
+/* Themes */
+const themes=[["midnight","Midnight","#7c8cff","#a855f7"],["neon","Neon City","#ff2bd6","#00f0ff"],["sunset","Sunset","#ff7a45","#ff3d81"],["aurora","Aurora","#2dffb0","#3aa0ff"],["lava","Lava","#ff4d2e","#ffc300"],["candy","Candy (light)","#ff4fa0","#8b5cf6"],["sunny","Sunny (light)","#ff8a00","#ef476f"]];
+let theme=store.get("knightTheme")||"midnight";
+$("themes").innerHTML=themes.map(t=>`<button data-t="${t[0]}" onclick="setTheme('${t[0]}',1)"><i style="background:linear-gradient(135deg,${t[2]},${t[3]})"></i>${t[1]}</button>`).join("");
+function setTheme(id,announce){
+  theme=id;document.documentElement.dataset.theme=id;store.set("knightTheme",id);
+  document.querySelectorAll("#themes button").forEach(b=>b.classList.toggle("on",b.dataset.t==id));
+  const cs=getComputedStyle(document.documentElement);starRGB=cs.getPropertyValue("--star").trim();
+  document.querySelector('meta[name=theme-color]').content=cs.getPropertyValue("--bg").trim();
+  if(announce){showToast("Theme: "+themes.find(t=>t[0]==id)[1]+" 🎨");boom()}
+}
+function randomTheme(){setTheme(pick(themes.filter(t=>t[0]!=theme))[0],1)}
+document.addEventListener("click",e=>{if(!e.target.closest(".nav-right"))$("themes").classList.remove("open")});
+setTheme(themes.some(t=>t[0]==theme)?theme:"midnight");
+
+/* Confetti + toast */
+function boom(){for(let i=0;i<50;i++){const d=document.createElement("i");d.className="cf";d.style.cssText=`left:${rnd(100)}vw;background:hsl(${rnd(360)} 90% 60%);--x:${rnd(200)-100}px;animation-delay:${Math.random()*.4}s`;document.body.appendChild(d);setTimeout(()=>d.remove(),2700)}}
+let tt;function showToast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),1800)}
+function copyText(t){navigator.clipboard&&navigator.clipboard.writeText(t).then(()=>showToast("Copied ✨"),()=>showToast("Copy failed"));addClick()}
+
+/* Clicks + stats */
+let clicks=Number(store.get("knightClicks"))||0;
+function syncClicks(){$("clickCount").textContent=`Clicks: ${clicks}`;$("clicksStat").textContent=clicks}
+function addClick(){clicks++;store.set("knightClicks",clicks);syncClicks()}
+const pointlessClick=addClick;syncClicks();
+let visits=(Number(store.get("knightVisits"))||0)+1;store.set("knightVisits",visits);$("visits").textContent=visits;
+
+/* Original games */
+const fortunes=["Something unexpectedly good is coming.","You will solve a problem you haven't even encountered yet.","Your next idea might actually be brilliant.","Today is a suspiciously good day to start something.","The internet remembers everything. Choose wisely.","A random decision will lead somewhere interesting.","Your future contains at least one very good cup of tea.","You are closer than you think.","The next project you start might become your favorite.","Knight0020 predicts: keep going."];
+function flipCoin(){$("coinResult").textContent=Math.random()<.5?"HEADS 🪙":"TAILS 🪙";addClick()}
+function fortune(){$("fortuneResult").textContent=pick(fortunes);addClick()}
+let secret=rnd(20)+1;
+function guessNumber(){const v=Number($("guessInput").value),o=$("guessResult");if(!v||v<1||v>20){o.textContent="Enter a number from 1–20.";return}
+  if(v===secret){o.textContent="🎉 Correct! New number generated.";secret=rnd(20)+1;boom()}else o.textContent=v<secret?"⬆️ Too low.":"⬇️ Too high.";addClick()}
+const reaction=$("reaction");let rStart=0,rTimer,rState="idle",best=Number(store.get("bestReaction"))||null;
+function reactionClick(){
+  if(rState=="idle"){rState="waiting";reaction.className="reaction-area waiting";reaction.textContent="Wait for green...";rTimer=setTimeout(()=>{rState="ready";rStart=performance.now();reaction.className="reaction-area ready";reaction.textContent="CLICK!"},1200+Math.random()*3500)}
+  else if(rState=="waiting"){clearTimeout(rTimer);rState="idle";reaction.className="reaction-area";reaction.textContent="Too early 😭"}
+  else{const t=Math.round(performance.now()-rStart);if(!best||t<best){best=t;store.set("bestReaction",t)}rState="idle";reaction.className="reaction-area";reaction.textContent="Click to try again";$("reactionResult").textContent=`Reaction: ${t} ms • Best: ${best} ms`;addClick()}}
+if(best)$("reactionResult").textContent=`Best: ${best} ms`;
+function randomColor(){const c="#"+Array.from({length:6},()=>"0123456789ABCDEF"[rnd(16)]).join(""),p=$("colorPreview");p.style.background=c;p.textContent=c;addClick()}
+
+/* Tic-Tac-Toe */
+const L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];let tb,tOver;
+const winner=b=>{for(const[a,c,d]of L)if(b[a]&&b[a]==b[c]&&b[a]==b[d])return b[a];return b.includes(null)?null:"T"};
+function minimax(b,p){const w=winner(b);if(w)return w=="O"?1:w=="X"?-1:0;let best=p=="O"?-2:2;for(let i=0;i<9;i++)if(!b[i]){b[i]=p;const s=minimax(b,p=="O"?"X":"O");b[i]=null;best=p=="O"?Math.max(best,s):Math.min(best,s)}return best}
+function tttInit(){tb=Array(9).fill(null);tOver=0;tttR();$("tttRes").textContent="Your move."}
+function tttR(){$("ttt").innerHTML=tb.map((v,i)=>`<button onclick="tttP(${i})">${v=="X"?"❌":v=="O"?"⭕":""}</button>`).join("")}
+function tttEnd(){const w=winner(tb);if(!w)return 0;tOver=1;$("tttRes").textContent=w=="X"?"🎉 You win!":w=="O"?"😈 AI wins.":"🤝 Draw.";if(w=="X")boom();addClick();return 1}
+function tttP(i){if(tOver||tb[i])return;tb[i]="X";if(!tttEnd()){const free=tb.map((v,j)=>v?-1:j).filter(j=>j>=0);let mv;
+  if(Math.random()<.2)mv=pick(free);else{let bs=-3;free.forEach(j=>{tb[j]="O";const s=minimax(tb,"X");tb[j]=null;if(s>bs){bs=s;mv=j}})}
+  tb[mv]="O";tttEnd()}tttR()}
+tttInit();
+
+/* Memory */
+let mc,mf,mlock,moves;
+function memInit(){const e=["🐉","🦄","🍕","🚀","👑","🔥","🎲","🌈"];mc=[...e,...e].sort(()=>Math.random()-.5).map(v=>({v,o:0,m:0}));mf=[];mlock=0;moves=0;memR();$("memRes").textContent="Moves: 0"}
+function memR(){$("mem").innerHTML=mc.map((c,i)=>`<button class="${c.o||c.m?"on":""}" onclick="memC(${i})">${c.o||c.m?c.v:"?"}</button>`).join("")}
+function memC(i){if(mlock||mc[i].o||mc[i].m)return;mc[i].o=1;mf.push(i);memR();if(mf.length<2)return;
+  moves++;$("memRes").textContent=`Moves: ${moves}`;const[a,b]=mf;mf=[];
+  if(mc[a].v==mc[b].v){mc[a].m=mc[b].m=1;mc[a].o=mc[b].o=0;memR();if(mc.every(c=>c.m)){$("memRes").textContent=`🎉 Cleared in ${moves} moves`;boom();addClick()}}
+  else{mlock=1;setTimeout(()=>{mc[a].o=mc[b].o=0;mlock=0;memR()},700)}}
+memInit();
+
+/* Snake */
+const sc=$("snake"),sx=sc.getContext("2d"),N=15,S=16;let sn,sd,nd,sf,st,ssc,sbest=Number(store.get("snakeBest"))||0,sOn=0;
+$("snakeRes").textContent=`Score: 0 • Best: ${sbest}`;
+const food=()=>{let f;do f=[rnd(N),rnd(N)];while(sn.some(s=>s[0]==f[0]&&s[1]==f[1]));return f};
+function snakeStart(){sn=[[7,7],[6,7],[5,7]];sd=nd=[1,0];sf=food();ssc=0;sOn=1;clearInterval(st);st=setInterval(tick,110);draw()}
+function dir(x,y){if(!sOn||(x==-sd[0]&&y==-sd[1]))return;nd=[x,y]}
+function tick(){sd=nd;const h=[sn[0][0]+sd[0],sn[0][1]+sd[1]];
+  if(h[0]<0||h[1]<0||h[0]>=N||h[1]>=N||sn.some(s=>s[0]==h[0]&&s[1]==h[1])){clearInterval(st);sOn=0;if(ssc>sbest){sbest=ssc;store.set("snakeBest",sbest)}$("snakeRes").textContent=`💀 Game over • Score: ${ssc} • Best: ${sbest}`;addClick();return}
+  sn.unshift(h);if(h[0]==sf[0]&&h[1]==sf[1]){ssc++;sf=food();$("snakeRes").textContent=`Score: ${ssc} • Best: ${sbest}`}else sn.pop();draw()}
+function draw(){const cs=getComputedStyle(document.documentElement);sx.clearRect(0,0,240,240);sx.fillStyle=cs.getPropertyValue("--accent2");sx.fillRect(sf[0]*S+2,sf[1]*S+2,S-4,S-4);
+  sn.forEach((s,i)=>{sx.fillStyle=i?cs.getPropertyValue("--accent"):cs.getPropertyValue("--text");sx.fillRect(s[0]*S+1,s[1]*S+1,S-2,S-2)})}
+addEventListener("keydown",e=>{const m={ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1],ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0]}[e.key];if(m&&sOn&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){e.preventDefault();dir(...m)}});
+sn=[[7,7]];sf=[10,7];sd=nd=[1,0];draw();
+
+/* Whack-a-mole */
+let ws=0,wt,wm=-1;
+function whackR(){$("whack").innerHTML=Array.from({length:9},(_,i)=>`<button onclick="whackHit(${i})">${i==wm?"🐹":"🕳️"}</button>`).join("")}
+function whackHit(i){if(i==wm){ws++;wm=-1;$("whackRes").textContent=`Score: ${ws}`;whackR()}}
+function whackStart(){clearInterval(wt);ws=0;let left=23;$("whackRes").textContent="Score: 0";wt=setInterval(()=>{left--;wm=rnd(9);whackR();if(left<=0){clearInterval(wt);wm=-1;whackR();$("whackRes").textContent=`⏱️ Time! Score: ${ws}`;if(ws>=8)boom();addClick()}},650)}
+whackR();
+
+/* RPS */
+function rps(u){const o=["🪨","📄","✂️"],c=rnd(3);$("rpsRes").textContent=`${o[u]} vs ${o[c]} — ${u==c?"Draw 🤝":(u-c+3)%3==1?"You win 🎉":"You lose 😈"}`;addClick()}
+
+/* Typing */
+const sentences=["the quick brown fox jumps over the lazy dog","knights never quit they only level up","code once debug twice ship it anyway","a tiny corner of the internet is still a home","every great project starts with a terrible first draft"];
+let tsent,t0=0;
+function typeInit(){tsent=pick(sentences);$("typeText").textContent=tsent;$("typeIn").value="";t0=0;$("typeRes").textContent="Start typing…"}
+$("typeIn").addEventListener("input",e=>{if(!t0)t0=performance.now();if(e.target.value==tsent){const m=(performance.now()-t0)/60000;$("typeRes").textContent=`⌨️ ${Math.round(tsent.split(" ").length/m)} WPM`;t0=0;boom();addClick()}});
+typeInit();
+
+/* Click speed */
+let cc=0,cOn=0;
+function cpsClick(){const b=$("cpsBtn");if(!cOn){cOn=1;cc=0;$("cpsRes").textContent="GO! 5 seconds…";setTimeout(()=>{cOn=0;$("cpsRes").textContent=`🏁 ${cc} clicks • ${(cc/5).toFixed(1)} per second`;b.textContent="Again?";addClick()},5000)}cc++;if(cOn)b.textContent=cc}
+
+/* Toys */
+const balls=["Yes, definitely.","Without a doubt.","Signs point to yes.","Ask again later.","Cannot predict now.","Don't count on it.","My sources say no.","Very doubtful.","Absolutely not.","The stars say maybe."];
+function ball(){$("ballRes").textContent=$("ballQ").value.trim()?"🎱 "+pick(balls):"Ask a question first.";addClick()}
+function roll(n){$("diceRes").textContent=`d${n}: ${rnd(n)+1}`;addClick()}
+function forge(){$("nameRes").textContent=`Sir ${pick(["Aldric","Bramble","Cedric","Drogo","Elric","Fenwick","Gawain","Hobb","Ivor","Kaelen"])} the ${pick(["Bold","Unbothered","Sleepy","Relentless","Curious","Chaotic","Radiant","Overcaffeinated"])} of ${pick(["Ironpeak","Moonvale","Emberfall","Glimmerdeep","Tea Hollow","Pixelgrove"])}`;addClick()}
+function pw(){const c="abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%^&*-_?",n=Number($("pwLen").value),a=crypto.getRandomValues(new Uint32Array(n));$("pwRes").textContent=[...a].map(v=>c[v%c.length]).join("")}
+pw();
+const jokes=[["Why do programmers prefer dark mode?","Because light attracts bugs."],["Why did the knight get a job in IT?","He was tired of fighting dragons, not dependencies."],["What's a computer's favorite snack?","Microchips."],["Why was the JavaScript developer sad?","They didn't know how to null their feelings."],["How do you comfort a JavaScript bug?","You console it."],["Why did the scarecrow win an award?","He was outstanding in his field."],["What do you call a fake noodle?","An impasta."]];
+function joke(){const j=pick(jokes);$("jokeRes").textContent=j[0];setTimeout(()=>{$("jokeRes").innerHTML=j[0]+"<br>👉 "+j[1]},1600);addClick()}
+function countdown(){const n=new Date(),y=new Date(n.getFullYear()+1,0,1),d=y-n,p=v=>String(v).padStart(2,"0");$("cd").textContent=`${Math.floor(d/864e5)}d ${p(Math.floor(d/36e5)%24)}h ${p(Math.floor(d/6e4)%60)}m ${p(Math.floor(d/1e3)%60)}s`}
+countdown();setInterval(countdown,1000);
+
+/* Quotes */
+const quotes=[["The secret of getting ahead is getting started.","Mark Twain"],["Stay hungry. Stay foolish.","Steve Jobs"],["Great things are done by a series of small things brought together.","Vincent van Gogh"],["It always seems impossible until it's done.","Nelson Mandela"],["The only way to do great work is to love what you do.","Steve Jobs"],["Do something today that your future self will thank you for.","Unknown"],["The best way out is always through.","Robert Frost"],["What we build today becomes what we explore tomorrow.","Knight0020"]];
+function randomQuote(){const q=pick(quotes);$("quote").textContent=`"${q[0]}"`;$("quoteAuthor").textContent=`— ${q[1]}`;addClick()}
+function copyQuote(){copyText(`${$("quote").textContent} ${$("quoteAuthor").textContent}`)}
+
+/* Konami code */
+const kon=["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];let ki=0;
+addEventListener("keydown",e=>{ki=e.key==kon[ki]?ki+1:(e.key==kon[0]?1:0);if(ki==kon.length){ki=0;boom();boom();showToast("⚔️ Knight Level UP! +100 clicks");for(let i=0;i<100;i++)addClick()}});
+</script>
+<script src="buddies.js"></script>
+<script src="knightos.js"></script>
+</body>
+</html>
